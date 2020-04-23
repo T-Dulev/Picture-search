@@ -44,6 +44,7 @@
             this.checkYear = new System.Windows.Forms.CheckBox();
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.buttonCopyImage = new System.Windows.Forms.Button();
+            this.lblDataInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
@@ -205,11 +206,22 @@
             this.buttonCopyImage.UseVisualStyleBackColor = true;
             this.buttonCopyImage.Click += new System.EventHandler(this.button1_Click);
             // 
+            // lblDataInfo
+            // 
+            this.lblDataInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblDataInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblDataInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(100)))));
+            this.lblDataInfo.Location = new System.Drawing.Point(320, 104);
+            this.lblDataInfo.Name = "lblDataInfo";
+            this.lblDataInfo.Size = new System.Drawing.Size(362, 20);
+            this.lblDataInfo.TabIndex = 40;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 518);
+            this.Controls.Add(this.lblDataInfo);
             this.Controls.Add(this.buttonCopyImage);
             this.Controls.Add(this.picPreview);
             this.Controls.Add(this.checkYear);
@@ -250,6 +262,7 @@
         private System.Windows.Forms.CheckBox checkYear;
         private System.Windows.Forms.PictureBox picPreview;
         internal System.Windows.Forms.Button buttonCopyImage;
+        private System.Windows.Forms.Label lblDataInfo;
     }
 }
 

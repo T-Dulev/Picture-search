@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using ExifLib;
@@ -17,19 +17,25 @@ namespace Picture_search
 
         public static DateTime getTakenDateTime(string filePath)
         {
-            ExifReader reader = new ExifReader(filePath);
-            DateTime datePictureTaken;
-            if (reader.GetTagValue<DateTime>(ExifTags.DateTimeDigitized, out datePictureTaken))
+            try
             {
-                reader.Dispose();
-                return datePictureTaken;
+                ExifReader reader = new ExifReader(filePath);
+                DateTime datePictureTaken;
+                if (reader.GetTagValue<DateTime>(ExifTags.DateTimeDigitized, out datePictureTaken))
+                {
+                    reader.Dispose();
+                    return datePictureTaken;
+                }
+                else
+                {
+                    reader.Dispose();
+                    return new DateTime(0001, 01, 01); //The FolderPath builder will recognize a date as 0001 for the year as an error and build a path to the error folder!
+                }
             }
-            else
+            catch
             {
-                reader.Dispose();
-                return new DateTime(0001, 01, 01); //The FolderPath builder will recognize a date as 0001 for the year as an error and build a path to the error folder!
+                return File.GetCreationTime(filePath);
             }
-
         }
 
     }

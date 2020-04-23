@@ -38,6 +38,8 @@ namespace Picture_search
                 }
             }
 
+            lblDataInfo.Text = "Saved file info for " + dict.Count() + " files";
+
         }
 
         private void btnSearchFolder_Click(object sender, EventArgs e)
@@ -96,7 +98,7 @@ namespace Picture_search
                     files.Add(item.Key);
                     files.Add(item.Value.ToString());
                 }
-                
+
                 File.WriteAllLines(FileData, files, Encoding.Default);
 
 
@@ -143,6 +145,8 @@ namespace Picture_search
                     if (!dict.ContainsKey(item.FullName))
                     {
                         dict.Add(item.FullName, ExifParser.getTakenDateTime(item.FullName));
+                        lblDataInfo.Text = "Saved file info for " + dict.Count() + " files";
+                        lblDataInfo.Refresh();
                     }
                 }
 
