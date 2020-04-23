@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,28 @@ namespace Picture_search
     {
 
         FileDelegate DateFilter;
+        string FileData = "I:\\FileData.txt";
 
-                
+        public Dictionary<string, DateTime> dict = new Dictionary<string, DateTime>();
+
         public MainForm()
         {
             InitializeComponent();
 
             DateFilter = GetFileDateFilter();
-           
+
+            List<string> files = new List<string>();
+
+            if (File.Exists(FileData))
+            {
+                var text = File.ReadAllLines(FileData, Encoding.Default);
+
+                for (var i = 0; i < text.Length; i += 2)
+                {
+                    dict.Add(text[i], Convert.ToDateTime(text[i + 1]));
+                }
+            }
+
         }
 
         private void btnSearchFolder_Click(object sender, EventArgs e)
@@ -40,7 +55,6 @@ namespace Picture_search
         {
             if (lblSearchFolder.Text != "")
             {
-                string FileData = "FileData.txt";
 
                 Cursor.Current = Cursors.WaitCursor;
                 long totalSize = 0;
@@ -52,18 +66,8 @@ namespace Picture_search
                 lblCurrFolder.Text = "";
                 lblCurrFolder.Refresh();
 
-                //var text = File.ReadAllLines(FileData, Encoding.Default);
-
-                //for (var i = 0; i < values.Length; i += 2)
-                //{
-                //    deserts.Add(int.Parse(values[i]), values[i + 1]);
-                //}
-
                 if (folderStat.FilesCount > 0)
                 {
-                    List<string> files = new List<string>();
-                    var dict = new Dictionary<string, string>();
-
                     foreach (var item in folderStat.FileList)
                     {
                         //        listProgress.Items.Add(new ListViewItem(new[] { item.FullName, ((int)item.Length / 1024 / 1024).ToString(), ExifParser.getTakenDateTime(item.FullName).ToString() }));
@@ -71,10 +75,6 @@ namespace Picture_search
 
                         //        listProgress.Items[listProgress.Items.Count - 1].EnsureVisible();
                         var fileDate = ExifParser.getTakenDateTime(item.FullName).ToString();
-                        files.Add(item.FullName);
-                        files.Add(fileDate);
-
-                        dict.Add(item.FullName, fileDate);
                     }
 
                     //var values = files.ToArray();
@@ -88,9 +88,18 @@ namespace Picture_search
                     //    //arr.Where((x, index) => index % 2 == 0).ToDictionary(x => x, v => arr[arr.IndexOf(v) + 1]);
                     //values.Where((v,index) =>index % 2 == 0).ToDictionary(v => int.Parse(v), v => values[values.IndexOf(v) + 1]);
 
-                    File.WriteAllLines(FileData, files, Encoding.Default);
-
                 }
+
+                var files = new List<string>();
+                foreach (var item in dict)
+                {
+                    files.Add(item.Key);
+                    files.Add(item.Value.ToString());
+                }
+                
+                File.WriteAllLines(FileData, files, Encoding.Default);
+
+
                 totalSize += folderStat.Size;
                 lblTotalFound.Text = "Found " + folderStat.FilesCount + " files, " + (long)totalSize / 1024 / 1024 / 1024 + " GB ";
                 lblTotalFound.Refresh();
@@ -128,6 +137,14 @@ namespace Picture_search
             try
             {
                 var files = directory.GetFiles(pattern);
+
+                foreach (var item in files)
+                {
+                    if (!dict.ContainsKey(item.FullName))
+                    {
+                        dict.Add(item.FullName, ExifParser.getTakenDateTime(item.FullName));
+                    }
+                }
 
                 var currFiles = files.Where(x => DateFilter(x));
 
@@ -207,7 +224,6 @@ namespace Picture_search
             }
         }
 
-
         private FileDelegate GetFileDateFilter()
         {
             int day = dateTimePicker.Value.Day;
@@ -222,7 +238,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Year == year) && (y.Month == month) && (y.Day == day);
                         };
                     }
@@ -230,7 +247,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Year == year) && (y.Month == month);
                         };
                     }
@@ -241,7 +259,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Year == year) && (y.Day == day);
                         };
                     }
@@ -249,7 +268,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Year == year);
                         };
                     }
@@ -263,7 +283,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Month == month) && (y.Day == day);
                         };
                     }
@@ -271,7 +292,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Month == month);
                         };
                     }
@@ -282,7 +304,8 @@ namespace Picture_search
                     {
                         return delegate(FileInfo x)
                         {
-                            var y = ExifParser.getTakenDateTime(x.FullName);
+                            //var y = ExifParser.getTakenDateTime(x.FullName);
+                            DateTime y = dict[x.FullName];
                             return (y.Day == day);
                         };
                     }
@@ -315,6 +338,11 @@ namespace Picture_search
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             DateFilter = GetFileDateFilter();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetImage(picPreview.Image);
         }
 
     }

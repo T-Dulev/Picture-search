@@ -43,6 +43,7 @@
             this.checkMonth = new System.Windows.Forms.CheckBox();
             this.checkYear = new System.Windows.Forms.CheckBox();
             this.picPreview = new System.Windows.Forms.PictureBox();
+            this.buttonCopyImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
@@ -194,11 +195,22 @@
             this.picPreview.TabIndex = 38;
             this.picPreview.TabStop = false;
             // 
+            // buttonCopyImage
+            // 
+            this.buttonCopyImage.Location = new System.Drawing.Point(564, 489);
+            this.buttonCopyImage.Name = "buttonCopyImage";
+            this.buttonCopyImage.Size = new System.Drawing.Size(117, 23);
+            this.buttonCopyImage.TabIndex = 39;
+            this.buttonCopyImage.Text = "Копирай снимката";
+            this.buttonCopyImage.UseVisualStyleBackColor = true;
+            this.buttonCopyImage.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 518);
+            this.Controls.Add(this.buttonCopyImage);
             this.Controls.Add(this.picPreview);
             this.Controls.Add(this.checkYear);
             this.Controls.Add(this.checkMonth);
@@ -237,6 +249,7 @@
         private System.Windows.Forms.CheckBox checkMonth;
         private System.Windows.Forms.CheckBox checkYear;
         private System.Windows.Forms.PictureBox picPreview;
+        internal System.Windows.Forms.Button buttonCopyImage;
     }
 }
 
