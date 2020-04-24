@@ -29,7 +29,7 @@ namespace Picture_search
                 else
                 {
                     reader.Dispose();
-                    return new DateTime(0001, 01, 01); //The FolderPath builder will recognize a date as 0001 for the year as an error and build a path to the error folder!
+                    return new DateTime(1970, 04, 03); //The FolderPath builder will recognize a date as 0001 for the year as an error and build a path to the error folder!
                 }
             }
             catch

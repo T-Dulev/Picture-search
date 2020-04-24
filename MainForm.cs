@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,6 +28,7 @@ namespace Picture_search
             {
                 //load files info
                 var text = File.ReadAllLines(FileData, Encoding.Default);
+
 
                 for (var i = 0; i < text.Length; i += 2)
                 {
@@ -66,15 +66,16 @@ namespace Picture_search
 
                 if (folderStat.FilesCount > 0)
                 {
-                    // save files info
-                    var files = new List<string>();
-                    foreach (var item in dict)
-                    {
-                        files.Add(item.Key);
-                        files.Add(item.Value.ToString());
-                    }
-                    File.WriteAllLines(FileData, files, Encoding.Default);
                 }
+
+                // save files info
+                var files = new List<string>();
+                foreach (var item in dict)
+                {
+                    files.Add(item.Key);
+                    files.Add(item.Value.ToString());
+                }
+                File.WriteAllLines(FileData, files, Encoding.Default);
 
                 totalSize += folderStat.Size;
                 lblTotalFound.Text = "Found " + folderStat.FilesCount + " files, " + (long)totalSize / 1024 / 1024 / 1024 + " GB ";
@@ -124,7 +125,9 @@ namespace Picture_search
                     }
                 }
 
-                var currFiles = files.Where(x => DateFilter(x));
+                var fl = files.Where(x => DateFilter(x));
+                var currFiles = new List<FileInfo>();
+                currFiles.AddRange(fl);
 
                 resultSubfolders.FileList.AddRange(currFiles);
                 resultSubfolders.FilesCount += currFiles.Count();
@@ -319,11 +322,11 @@ namespace Picture_search
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             string pict = listProgress.FocusedItem.Text;
 
             if (File.Exists(pict))
-            {                
+            {
                 var list = new StringCollection();
                 list.Add(pict);
                 Clipboard.SetFileDropList(list);

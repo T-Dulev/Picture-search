@@ -1,7 +1,6 @@
 H:\VS2013\008 Picture search\Picture search\bin\Debug\Picture search.exe.config
 H:\VS2013\008 Picture search\Picture search\bin\Debug\Picture search.exe
 H:\VS2013\008 Picture search\Picture search\bin\Debug\Picture search.pdb
-H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture search.csprojResolveAssemblyReference.cache
 H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture_search.Properties.Resources.resources
 H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture search.csproj.GenerateResource.Cache
 H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture search.exe
