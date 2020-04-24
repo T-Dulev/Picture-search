@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Collections.Specialized;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Picture_search
@@ -30,6 +27,7 @@ namespace Picture_search
 
             if (File.Exists(FileData))
             {
+                //load files info
                 var text = File.ReadAllLines(FileData, Encoding.Default);
 
                 for (var i = 0; i < text.Length; i += 2)
@@ -39,7 +37,6 @@ namespace Picture_search
             }
 
             lblDataInfo.Text = "Saved file info for " + dict.Count() + " files";
-
         }
 
         private void btnSearchFolder_Click(object sender, EventArgs e)
@@ -57,7 +54,6 @@ namespace Picture_search
         {
             if (lblSearchFolder.Text != "")
             {
-
                 Cursor.Current = Cursors.WaitCursor;
                 long totalSize = 0;
 
@@ -70,37 +66,15 @@ namespace Picture_search
 
                 if (folderStat.FilesCount > 0)
                 {
-                    foreach (var item in folderStat.FileList)
+                    // save files info
+                    var files = new List<string>();
+                    foreach (var item in dict)
                     {
-                        //        listProgress.Items.Add(new ListViewItem(new[] { item.FullName, ((int)item.Length / 1024 / 1024).ToString(), ExifParser.getTakenDateTime(item.FullName).ToString() }));
-                        //        listProgress.Refresh();
-
-                        //        listProgress.Items[listProgress.Items.Count - 1].EnsureVisible();
-                        var fileDate = ExifParser.getTakenDateTime(item.FullName).ToString();
+                        files.Add(item.Key);
+                        files.Add(item.Value.ToString());
                     }
-
-                    //var values = files.ToArray();
-
-                    //Dictionary<string, string> dict = 
-                    //    //(
-                    //    //from p in arr
-                    //    //where index % 2 == 0 
-                    //    //select new { p., Projects = g })
-
-                    //    //arr.Where((x, index) => index % 2 == 0).ToDictionary(x => x, v => arr[arr.IndexOf(v) + 1]);
-                    //values.Where((v,index) =>index % 2 == 0).ToDictionary(v => int.Parse(v), v => values[values.IndexOf(v) + 1]);
-
+                    File.WriteAllLines(FileData, files, Encoding.Default);
                 }
-
-                var files = new List<string>();
-                foreach (var item in dict)
-                {
-                    files.Add(item.Key);
-                    files.Add(item.Value.ToString());
-                }
-
-                File.WriteAllLines(FileData, files, Encoding.Default);
-
 
                 totalSize += folderStat.Size;
                 lblTotalFound.Text = "Found " + folderStat.FilesCount + " files, " + (long)totalSize / 1024 / 1024 / 1024 + " GB ";
@@ -181,7 +155,6 @@ namespace Picture_search
                         }
                     }
                 }
-
             }
             catch
             {
@@ -345,6 +318,19 @@ namespace Picture_search
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            
+            string pict = listProgress.FocusedItem.Text;
+
+            if (File.Exists(pict))
+            {                
+                var list = new StringCollection();
+                list.Add(pict);
+                Clipboard.SetFileDropList(list);
+            }
+        }
+
+        private void buttonCopyBMP_Click(object sender, EventArgs e)
         {
             Clipboard.SetImage(picPreview.Image);
         }

@@ -45,6 +45,7 @@
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.buttonCopyImage = new System.Windows.Forms.Button();
             this.lblDataInfo = new System.Windows.Forms.Label();
+            this.buttonCopyBMP = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
@@ -216,11 +217,22 @@
             this.lblDataInfo.Size = new System.Drawing.Size(362, 20);
             this.lblDataInfo.TabIndex = 40;
             // 
+            // buttonCopyBMP
+            // 
+            this.buttonCopyBMP.Location = new System.Drawing.Point(441, 489);
+            this.buttonCopyBMP.Name = "buttonCopyBMP";
+            this.buttonCopyBMP.Size = new System.Drawing.Size(117, 23);
+            this.buttonCopyBMP.TabIndex = 41;
+            this.buttonCopyBMP.Text = "Копирай BMP";
+            this.buttonCopyBMP.UseVisualStyleBackColor = true;
+            this.buttonCopyBMP.Click += new System.EventHandler(this.buttonCopyBMP_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 518);
+            this.Controls.Add(this.buttonCopyBMP);
             this.Controls.Add(this.lblDataInfo);
             this.Controls.Add(this.buttonCopyImage);
             this.Controls.Add(this.picPreview);
@@ -263,6 +275,7 @@
         private System.Windows.Forms.PictureBox picPreview;
         internal System.Windows.Forms.Button buttonCopyImage;
         private System.Windows.Forms.Label lblDataInfo;
+        internal System.Windows.Forms.Button buttonCopyBMP;
     }
 }
 
