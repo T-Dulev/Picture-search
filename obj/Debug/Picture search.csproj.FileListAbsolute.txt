@@ -7,3 +7,4 @@ H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture search.exe
 H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture search.pdb
 H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture_search.MainForm.resources
 H:\VS2013\008 Picture search\Picture search\bin\Debug\ExifLib.dll
+H:\VS2013\008 Picture search\Picture search\obj\Debug\Picture search.csprojResolveAssemblyReference.cache

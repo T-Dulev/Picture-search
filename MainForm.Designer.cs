@@ -46,6 +46,7 @@
             this.buttonCopyImage = new System.Windows.Forms.Button();
             this.lblDataInfo = new System.Windows.Forms.Label();
             this.buttonCopyBMP = new System.Windows.Forms.Button();
+            this.checkAfter = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
@@ -227,11 +228,24 @@
             this.buttonCopyBMP.UseVisualStyleBackColor = true;
             this.buttonCopyBMP.Click += new System.EventHandler(this.buttonCopyBMP_Click);
             // 
+            // checkAfter
+            // 
+            this.checkAfter.AutoSize = true;
+            this.checkAfter.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.checkAfter.Location = new System.Drawing.Point(564, 65);
+            this.checkAfter.Name = "checkAfter";
+            this.checkAfter.Size = new System.Drawing.Size(41, 18);
+            this.checkAfter.TabIndex = 42;
+            this.checkAfter.Text = " <";
+            this.checkAfter.UseVisualStyleBackColor = true;
+            this.checkAfter.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 518);
+            this.Controls.Add(this.checkAfter);
             this.Controls.Add(this.buttonCopyBMP);
             this.Controls.Add(this.lblDataInfo);
             this.Controls.Add(this.buttonCopyImage);
@@ -276,6 +290,7 @@
         internal System.Windows.Forms.Button buttonCopyImage;
         private System.Windows.Forms.Label lblDataInfo;
         internal System.Windows.Forms.Button buttonCopyBMP;
+        private System.Windows.Forms.CheckBox checkAfter;
     }
 }
 

@@ -198,9 +198,14 @@ namespace Picture_search
 
             if (File.Exists(pict))
             {
-                FileStream fs = new FileStream(pict, FileMode.Open, FileAccess.Read);
-                picPreview.Image = System.Drawing.Image.FromStream(fs);
-                fs.Close();
+                try
+                {
+                    FileStream fs = new FileStream(pict, FileMode.Open, FileAccess.Read);
+                    picPreview.Image = System.Drawing.Image.FromStream(fs);
+                    fs.Close();
+                }
+                catch
+                { }
             }
         }
 
@@ -216,11 +221,22 @@ namespace Picture_search
                 {
                     if (checkDay.Checked)
                     {
-                        return delegate(FileInfo x)
+                        if (checkAfter.Checked)
                         {
-                            //var y = ExifParser.getTakenDateTime(x.FullName);
-                            DateTime y = dict[x.FullName];
-                            return (y.Year == year) && (y.Month == month) && (y.Day == day);
+                            return delegate(FileInfo x)
+                            {
+                                DateTime y = dict[x.FullName];
+                                return (dateTimePicker.Value.Date.CompareTo(y)<=0);
+                            };
+                        }
+                        else
+                        {
+                            return delegate(FileInfo x)
+                            {
+                                //var y = ExifParser.getTakenDateTime(x.FullName);
+                                DateTime y = dict[x.FullName];
+                                return (y.Year == year) && (y.Month == month) && (y.Day == day);
+                            };
                         };
                     }
                     else
@@ -300,18 +316,25 @@ namespace Picture_search
             }
         }
 
+        private void ShowAfter()
+        {
+            checkAfter.Visible = (checkYear.Checked) && (checkMonth.Checked) && (checkDay.Checked);
+        }
         private void checkDay_CheckedChanged(object sender, EventArgs e)
         {
+            ShowAfter();
             DateFilter = GetFileDateFilter();
         }
 
         private void checkMonth_CheckedChanged(object sender, EventArgs e)
         {
+            ShowAfter();
             DateFilter = GetFileDateFilter();
         }
 
         private void checkYear_CheckedChanged(object sender, EventArgs e)
         {
+            ShowAfter();
             DateFilter = GetFileDateFilter();
         }
 
