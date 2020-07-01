@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -359,6 +360,26 @@ namespace Picture_search
         private void buttonCopyBMP_Click(object sender, EventArgs e)
         {
             Clipboard.SetImage(picPreview.Image);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            var half = dict.Count / 2;
+
+            for (int i = 0; i < half; i++)
+			{
+                dict.Remove(dict.Keys.First()); 
+			}
+
+            // save files info
+            var files = new List<string>();
+            foreach (var item in dict)
+            {
+                files.Add(item.Key);
+                files.Add(item.Value.ToString());
+            }
+            File.WriteAllLines(FileData, files, Encoding.Default);
+            lblDataInfo.Text = "Saved file info for " + dict.Count() + " files";
         }
 
     }

@@ -47,6 +47,7 @@
             this.lblDataInfo = new System.Windows.Forms.Label();
             this.buttonCopyBMP = new System.Windows.Forms.Button();
             this.checkAfter = new System.Windows.Forms.CheckBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
@@ -213,9 +214,9 @@
             this.lblDataInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.lblDataInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblDataInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(100)))));
-            this.lblDataInfo.Location = new System.Drawing.Point(320, 104);
+            this.lblDataInfo.Location = new System.Drawing.Point(309, 104);
             this.lblDataInfo.Name = "lblDataInfo";
-            this.lblDataInfo.Size = new System.Drawing.Size(362, 20);
+            this.lblDataInfo.Size = new System.Drawing.Size(280, 20);
             this.lblDataInfo.TabIndex = 40;
             // 
             // buttonCopyBMP
@@ -240,11 +241,22 @@
             this.checkAfter.UseVisualStyleBackColor = true;
             this.checkAfter.Visible = false;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(595, 101);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(86, 23);
+            this.btnRefresh.TabIndex = 43;
+            this.btnRefresh.Text = "Refresh 1/2";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 518);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.checkAfter);
             this.Controls.Add(this.buttonCopyBMP);
             this.Controls.Add(this.lblDataInfo);
@@ -291,6 +303,7 @@
         private System.Windows.Forms.Label lblDataInfo;
         internal System.Windows.Forms.Button buttonCopyBMP;
         private System.Windows.Forms.CheckBox checkAfter;
+        internal System.Windows.Forms.Button btnRefresh;
     }
 }
 
